@@ -1,65 +1,59 @@
 const currencyRatio = {
-    vnd: {
-        usd: 0.000043,
-        krw: 0.051,
-        eur: 0.000039,
-        vnd: 1
-    },
-    usd: {
-        usd: 1,
-        krw: 1193.27,
-        eur: 0.9,
-        vnd: 23235.5
-    },
-    krw: {
-        usd: 0.00084,
-        krw: 1,
-        eur: 0.00075,
-        vnd: 19.47
-    },
-    eur: {
-        usd: 1.13,
-        krw: 1348.77,
-        eur: 1,
-        vnd: 26135.96,
-    }
+  vnd: {
+    usd: 0.000043,
+    krw: 0.051,
+    eur: 0.000039,
+    vnd: 1,
+  },
+  usd: {
+    usd: 1,
+    krw: 1193.27,
+    eur: 0.9,
+    vnd: 23235.5,
+  },
+  krw: {
+    usd: 0.00084,
+    krw: 1,
+    eur: 0.00075,
+    vnd: 19.47,
+  },
+  eur: {
+    usd: 1.13,
+    krw: 1348.77,
+    eur: 1,
+    vnd: 26135.96,
+  },
 };
 
 function getConversionRate(from, to) {
-    return currencyRatio[from][to];
+  return currencyRatio[from][to];
 }
 
-let convertButton = document.getElementById('convertButton')
-convertButton.addEventListener("click", changeMoney)
+let convertButton = document.getElementById("convertButton");
+convertButton.addEventListener("click", changeMoney);
 
 function changeMoney() {
+  // select input
+  let amountInput = document.getElementById("amountInput");
 
-    // select input
-    let amountInput = document.getElementById('amountInput')
+  // get value from input
+  let result = amountInput.value;
 
-    // get value from input
-    let result = amountInput.value
-    // console.log(result)
+  //select
+  let fromCurrency = document.getElementById("fromCurrencyList");
 
-    //select
-    let fromCurrency = document.getElementById("fromCurrencyList")
-    let toCurrency = document.getElementById("toCurrencyList")
-    // console.log(toCurrency)
+  //get value from the select tag
+  let toCurrency = document.getElementById("toCurrencyList");
 
-    //get value from the select tag
+  //use the values from fromCurrencyList and toCurrencyList to get the conversionRate
+  let conversionRate = getConversionRate(fromCurrency.value, toCurrency.value);
 
-    //use the values from fromCurrencyList and toCurrencyList to get the conversionRate
-    let conversionRate = getConversionRate(fromCurrency.value, toCurrency.value)
+  //calculate the result exchange money
+  let convertedAmount = result * conversionRate;
 
-    //calculate the result exchange money
-    let convertedAmount = result * conversionRate
-
-
-    document.getElementById("result").innerHTML = `Converted currency is ${convertedAmount.toFixed(2)}`
-
-
+  document.getElementById(
+    "result"
+  ).innerHTML = `Converted currency is ${convertedAmount.toFixed(2)}`;
 }
 
-console.log('test')
-
-
+console.log("test");
